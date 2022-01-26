@@ -1,6 +1,13 @@
 {% extends 'main/base.html' %}
 {% block content %}
+<form method="get">
+    <input type="text" name="nome" placeholder="Buscar por nome"/>
+    <input type="checkbox" name="ativo">Ativo</input>
+    <input type="submit" value="Buscar"/>
+</form>
+
 <button><a href="{% url 'pessoa.novo' %}">Novo</a></button>
+
 <table>
     <thead>
         <tr>
@@ -12,7 +19,7 @@
     <tbody>
         {% for pessoa in  object_list %}
         <tr>
-            <td>{{ pessoa.nome_completo }}</td>
+            <td><a href="{% url 'pessoa.editar' pessoa.pk %}">{{ pessoa.nome_completo }}</a></td>
             <td>{{ pessoa.data_nascimento | date:"SHORT_DATE_FORMAT" }}</td>
             <td>
             {% if pessoa.ativo %}
@@ -20,6 +27,9 @@
             {% else %}
             Não
             {% endif %}
+            </td>
+            <td>
+                <a href="{% url 'pessoa.remover' pessoa.pk %}">Remover</a>
             </td>
         </tr>
         {% endfor %}
