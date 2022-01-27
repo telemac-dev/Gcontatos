@@ -18,7 +18,7 @@ class ListaPessoaView(ListView):
             queryset = queryset.filter(nome_completo__contains=filtro_nome)
 
         if filtro_ativo:
-            queryset = queryset.filter(ativo__contains=filtro_ativo)
+            queryset = queryset.filter(ativo=True)
 
         return queryset
 
